@@ -10,7 +10,7 @@
         handler(w) {
             const raw = w.matchText.slice(2, -2).trim(),
                 $wrp = $(`<span role='update-wrapper'>`).text(stringFrom(State.getVar(raw))).get(0),
-                getShadow = shadowHandler(`State.getVar("${raw}")`);
+                getShadow = shadowHandler(`State.getVar("${raw.replace(/"|'|`/g, m => `\\${m}`)}")`);
 
             $wrp.update = function () {
                 this.innerText = stringFrom(getShadow());
