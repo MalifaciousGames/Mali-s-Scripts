@@ -13,7 +13,7 @@ window.TemplateContainer = class TemplateContainer {
     }
 
     getOutput(match) {
-      	const d = Array.isArray(this.def) ? this.def.random() : this.def;
+        const d = Array.isArray(this.def) ? this.def.random() : this.def;
 
         switch (typeof d) {
             case 'string': return d;
@@ -30,17 +30,17 @@ window.TemplateContainer = class TemplateContainer {
             new this(n, def);
         }
     }
-  
-	static delete(name) {delete this.active[name]}
-  	static get(name) {return this.active[name]}
-  	static has(name) {return !!this.active[name]}
-  	
+
+    static delete(name) { delete this.active[name] }
+    static get(name) { return this.active[name] }
+    static has(name) { return !!this.active[name] }
+
     static active = {};
     static tryStandardTemplate(name) {
         let temp = Template.get(name);
         if (!temp) return;
 
-      	if (temp instanceof Array) temp = temp.random();
+        if (temp instanceof Array) temp = temp.random();
         switch (typeof temp) {
             case 'string': return temp;
             case 'function': return stringFrom(temp.call({ name }));
@@ -59,9 +59,9 @@ Wikifier.Parser.add({
         if (!template) {
             const output = TemplateContainer.tryStandardTemplate(name);
             if (output == null) return throwError(o, `No template name found for : '${name}'`, m);
-			
-          	let frag = $(new DocumentFragment()).wiki(output)[0];
-          	if (frag.firstChild.nodeType === 1) frag = frag.firstChild;
+
+            let frag = $(new DocumentFragment()).wiki(output)[0];
+            if (frag.firstChild.nodeType === 1) frag = frag.firstChild;
             $(o).append($(frag).wiki(txt));
         } else {
             $(o).wiki(template.getOutput(txt));
