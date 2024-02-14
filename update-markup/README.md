@@ -7,6 +7,10 @@ This script enables you to refresh displayed variables whenever they are modifie
 ### Syntax ###
 
 ```html
+{[element] [html attributes] {variable}}
+```
+
+```html
 <<set $num = 0, $array = ['One','Two','Three','Four','Five']>>
 
 Item at index {{$num}} is {{$array[$num]}} 
@@ -15,6 +19,10 @@ Item at index {{$num}} is {{$array[$num]}}
   <<set $num++>>
 <</button>>
 ```
+
+### HTML output ###
+
+By default, the `{{}}` macro creates a `<span role='update-wrapper'>`. You can modify the element's type and html attributes by supplying them before the inner set of brackets: `{div id='hp' {$hp}}` will result in `<div id='hp' role='update-wrapper'>`.
 
 ### Variable types ###
 
@@ -38,6 +46,3 @@ Time passes, it is now {{$time}} .
 <</silently>>
 ```
 
-### HTML output ###
-
-The output is a custom `<update-wrapper>` element with a unique `data-id` attribute linked to the variable's raw expression.
