@@ -1,6 +1,22 @@
+## Container templates
+
+A variation on Sugarcube templates that supports user-supplied contents: `?(templateName: ...contents...)`.
+
+[Container templates](container-template-markup)
+
+***
+
+## The cycle custom element
+
+A custom element that automatically cycles its contents. Can be used in any story format.
+
+[Cycle element](cycle-element)
+
+***
+
 ## The OmniCoder API
 
-Encode things.
+Encodes stuff.
 
 ***
 
