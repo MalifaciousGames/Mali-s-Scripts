@@ -11,9 +11,8 @@
 	if (!defaultFilePath.remote && !defaultFilePath.local) return;
 
 	let path, tempPaths = [
-		'AppData/Local', //Windows
-		'var/folders', //mac OS
-		'/tmp' //Linux
+		'AppData/Local', 'var/folders', '/tmp', //OS temp paths for older versions of Twine
+		'Twine/Scratch' //2.8 scratch folder
 	];
 
 	if (location.origin.includes('twinery')) {//Launched from browser Twine
