@@ -15,7 +15,7 @@ Failed to load img with url "folder/image.png". In :
 - passage "passage2" : chraracter 22/1466, chraracter 1322/1466.
 ```
 
-#### How to use
+### How to use
 
 Paste the code in the story's JS tab.
 
@@ -25,7 +25,7 @@ The function takes two optional arguments, both true by default : `testMedia(get
 - `getTextReport` : Generates a text file containing the error report
 - `hotlinkWarning` : URLs starting with `http` return a warning.
 
-#### Limitations
+### Limitations
 
 The script does not account for :
 - computed URLs
