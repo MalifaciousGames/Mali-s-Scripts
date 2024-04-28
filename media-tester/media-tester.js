@@ -38,6 +38,9 @@ window.testMedia = (getFile = true, warnHotLink = true) => {
       } else if (!errCount) {
          console.log('No errors found!');
       }
+   }, logReport = (txt) => {
+      console.log(txt);
+      report += txt + '\n';
    }, getLoc = loc => {
       let o = '\n';
       for (const k in loc) o += k + loc[k].slice(0, -2) + `.\n`;
@@ -70,27 +73,24 @@ window.testMedia = (getFile = true, warnHotLink = true) => {
 
       for (const url in media) {
 
+         // hotlink warning, if toggled
          if (warnHotLink && url.startsWith('http')) {
-            const w = `Warning : Found online url "${url}". In :${getLoc(media[url])}`;
-            console.log(w);
-            report += w + '\n';
-         }
+            errCount++;
+            logReport(`Warning : Found online url "${url}". In :${getLoc(media[url])}`)
+         };
 
          const t = document.createElement(mode);
          t.onerror = () => {
-            const w = `ERROR : \nFailed to load ${mode} with url "${url}". In :${getLoc(media[url])}`;
-            console.log(w);
-            report += w + '\n';
-            if ((done +=1) === tot) console.log(`...done...`), next();
+            errCount++;
+            logReport(`ERROR : \nFailed to load ${mode} with url "${url}". In :${getLoc(media[url])}`);
+            if ((done += 1) === tot) console.log(`...done...`), next();
          };
          t.addEventListener(preset.loadEv, () => {
-            if ((done +=1) === tot) console.log(`...done...`), next();
+            if ((done += 1) === tot) console.log(`...done...`), next();
          })
          t.src = url;
-
       }
    };
 
    next(true);
-
 };

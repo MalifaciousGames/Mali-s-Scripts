@@ -11,8 +11,8 @@ Like so :
 ```html
 ERROR : 
 Failed to load img with url "folder/image.png". In :
-- passage "passage1" : chraracter 686/2300.
-- passage "passage2" : chraracter 22/1466, chraracter 1322/1466.
+- passage "passage1" : character 686/2300.
+- passage "passage2" : character 22/1466, character 1322/1466.
 ```
 
 ### How to use
