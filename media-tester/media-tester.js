@@ -1,4 +1,3 @@
-
 window.testMedia = (getFile = true, warnHotLink = true) => {
 
    let report = '', step = 0, errCount = 0;
@@ -7,19 +6,19 @@ window.testMedia = (getFile = true, warnHotLink = true) => {
       img: {
          formats: ['png', 'jpg', 'gif', 'ico', 'svg'],
          testElem: 'img',
-         title: '========= IMAGES =========\n\n',
+         title: '========= IMAGES =========\n',
          loadEv: 'load'
       },
       audio: {
          formats: ['mp3', 'ogg', 'wav', 'aac', 'flac'],
          testElem: 'audio',
-         title: '========= AUDIO TRACKS =========\n\n',
+         title: '========= AUDIO TRACKS =========\n',
          loadEv: 'loadstart'
       },
       video: {
          formats: ['mp4', 'webm', 'mov', 'avi', 'mkv'],
          testElem: 'video',
-         title: '========= VIDEOS =========\n\n',
+         title: '========= VIDEOS =========\n',
          loadEv: 'loadstart'
       }
    }, next = first => {
@@ -38,8 +37,8 @@ window.testMedia = (getFile = true, warnHotLink = true) => {
       } else if (!errCount) {
          console.log('No errors found!');
       }
-   }, logReport = (txt) => {
-      console.log(txt);
+   }, logReport = (txt, cs) => {
+      console[cs ?? 'log'](txt);
       report += txt + '\n';
    }, getLoc = loc => {
       let o = '\n';
@@ -65,32 +64,41 @@ window.testMedia = (getFile = true, warnHotLink = true) => {
          });
       });
 
-      let tot = Object.keys(media).length, done = 0;
-      if (!tot) return console.log(`No urls found for the preset : ${mode}`), next();
+      let tot = Object.keys(media).length, done = 0, locErr = 0;
 
-      console.group(mode + ` , ${tot} urls`);
-      report += preset.title;
+      // title
+      logReport(preset.title, 'group');
+
+      if (!tot) return logReport(`No ${mode} urls found.\n`), next();
+
+      console.log(`... testing ${tot} url${tot > 1 ? 's' : ''}...`);
 
       for (const url in media) {
 
          // hotlink warning, if toggled
          if (warnHotLink && url.startsWith('http')) {
-            errCount++;
-            logReport(`WARNING : \nFound online url "${url}". In :${getLoc(media[url])}`)
+            errCount++; locErr++;
+            logReport(`WARNING : \nFound online url "${url}". In :${getLoc(media[url])}`);
          };
 
          const t = document.createElement(mode);
          t.onerror = () => {
-            errCount++;
+            errCount++; locErr++;
             logReport(`ERROR : \nFailed to load ${mode} with url "${url}". In :${getLoc(media[url])}`);
             if ((done += 1) === tot) console.log(`...done...`), next();
          };
          t.addEventListener(preset.loadEv, () => {
-            if ((done += 1) === tot) console.log(`...done...`), next();
+            if ((done += 1) === tot) {
+               console.log(`...done...`);
+               // no error in media category
+               if (!locErr) report += `${tot}/${tot} url${tot > 1 ? 's' : ''} loaded successfully.\n`;
+               next();
+            };
          })
          t.src = url;
       }
    };
 
    next(true);
+
 };

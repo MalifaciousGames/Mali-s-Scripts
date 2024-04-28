@@ -33,4 +33,4 @@ The script does not account for :
 - computed URLs
 - content that would be commented out, inaccessible or hidden
 
-The should only be used when launching the game locally as most hosting services have protection against loading too many media elements at once.
+This should only be used when launching the game locally as most hosting services have protection against loading too many media elements at once.
