@@ -13,13 +13,13 @@ window.testMedia = (getFile = true, warnHotLink = true) => {
          formats: ['mp3', 'ogg', 'wav', 'aac', 'flac'],
          testElem: 'audio',
          title: '========= AUDIO TRACKS =========\n',
-         loadEv: 'loadstart'
+         loadEv: 'loadeddata'
       },
       video: {
          formats: ['mp4', 'webm', 'mov', 'avi', 'mkv'],
          testElem: 'video',
          title: '========= VIDEOS =========\n',
-         loadEv: 'loadstart'
+         loadEv: 'loadeddata'
       }
    }, next = first => {
       if (!first) console.groupEnd(), step++;
@@ -46,7 +46,7 @@ window.testMedia = (getFile = true, warnHotLink = true) => {
       return o;
    }, typeCheck = mode => {
 
-      const media = {}, preset = presets[mode], matcher = new RegExp(`[\\w :~\\.\\/-]+\\.(${preset.formats.join('|')})(?![\\w ~\\.\\/-])`, 'g');
+      const media = {}, preset = presets[mode], matcher = new RegExp(`(?:https*:|file:\\/\\/\\w:)*[\\w ~\\.\\/-]+\\.(${preset.formats.join('|')})(?![\\w ~\\.\\/-])`, 'g');
 
       $('tw-passagedata, style, script').each((_, e) => {
 
