@@ -46,7 +46,7 @@ window.testMedia = (getFile = true, warnHotLink = true) => {
       return o;
    }, typeCheck = mode => {
 
-      const media = {}, preset = presets[mode], matcher = new RegExp(`(https*:)*[\\w ~\\.\\/-]+\\.(${preset.formats.join('|')})(?![\\w ~\\.\\/-])`, 'g');
+      const media = {}, preset = presets[mode], matcher = new RegExp(`[\\w :~\\.\\/-]+\\.(${preset.formats.join('|')})(?![\\w ~\\.\\/-])`, 'g');
 
       $('tw-passagedata, style, script').each((_, e) => {
 
@@ -78,13 +78,19 @@ window.testMedia = (getFile = true, warnHotLink = true) => {
          // hotlink warning, if toggled
          if (warnHotLink && url.startsWith('http')) {
             errCount++; locErr++;
-            logReport(`WARNING : \nFound online url "${url}". In :${getLoc(media[url])}`);
+            logReport(`WARNING :\nFound online url "${url}". In :${getLoc(media[url])}`);
+         };
+
+         // file protocol!
+         if (url.startsWith('file:')) {
+            errCount++; locErr++;
+            logReport(`WARNING :\nFound file protocol "${url}".\nThis file is only accessible on your computer! In :${getLoc(media[url])}`);
          };
 
          const t = document.createElement(mode);
          t.onerror = () => {
             errCount++; locErr++;
-            logReport(`ERROR : \nFailed to load ${mode} with url "${url}". In :${getLoc(media[url])}`);
+            logReport(`ERROR :\nFailed to load ${mode} with url "${url}". In :${getLoc(media[url])}`);
             if ((done += 1) === tot) console.log(`...done...`), next();
          };
          t.addEventListener(preset.loadEv, () => {
