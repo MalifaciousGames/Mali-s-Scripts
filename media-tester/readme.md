@@ -15,6 +15,8 @@ Failed to load img with url "folder/image.png". In :
 - passage "passage2" : character 22/1466, character 1322/1466.
 ```
 
+**This script works with every story format except Chapbook**
+
 ### How to use
 
 Paste the code in the story's JS tab.

@@ -7,19 +7,19 @@ window.testMedia = (getFile = true, warnHotLink = true) => {
       img: {
          formats: ['png', 'jpg', 'gif', 'ico', 'svg'],
          testElem: 'img',
-         title: '\n ======= Images =======\n\n',
+         title: '========= IMAGES =========\n\n',
          loadEv: 'load'
       },
       audio: {
          formats: ['mp3', 'ogg', 'wav', 'aac', 'flac'],
          testElem: 'audio',
-         title: '\n ======= Audio tracks =======\n\n',
+         title: '========= AUDIO TRACKS =========\n\n',
          loadEv: 'loadstart'
       },
       video: {
          formats: ['mp4', 'webm', 'mov', 'avi', 'mkv'],
          testElem: 'video',
-         title: '\n ======= Videos =======\n\n',
+         title: '========= VIDEOS =========\n\n',
          loadEv: 'loadstart'
       }
    }, next = first => {
@@ -57,7 +57,7 @@ window.testMedia = (getFile = true, warnHotLink = true) => {
          const n = e.getAttribute('name') ?? e.getAttribute('title') ?? e.getAttribute('data-title') ?? e.getAttribute('id') ?? 'Some ' + e.localName, type = e.localName === 'tw-passagedata' ? 'passage' : e.localName, totLength = e.innerText.length;
 
          matches.forEach(m => {
-            const pos = `- ${type} "${n}" : `, char = `chraracter ${m.index}/${totLength}, `;
+            const pos = `- ${type} "${n}" : `, char = `character ${m.index}/${totLength}, `;
             m = m[0];
             media[m] ??= {};
             media[m][pos] ??= '';
@@ -76,7 +76,7 @@ window.testMedia = (getFile = true, warnHotLink = true) => {
          // hotlink warning, if toggled
          if (warnHotLink && url.startsWith('http')) {
             errCount++;
-            logReport(`Warning : Found online url "${url}". In :${getLoc(media[url])}`)
+            logReport(`WARNING : \nFound online url "${url}". In :${getLoc(media[url])}`)
          };
 
          const t = document.createElement(mode);
