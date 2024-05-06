@@ -22,7 +22,7 @@ Item at index {{$num}} is {{$array[$num]}}
 
 ### HTML output ###
 
-By default, the `{{}}` macro creates a `<span role='update-wrapper'>`. You can modify the element's type and html attributes by supplying them before the inner set of brackets: `{div id='hp' {$hp}}` will result in `<div id='hp' role='update-wrapper'>`.
+By default, the `{{}}` macro creates a `<span role='update-wrapper' aria-live='polite'>`. You can modify the element's type and html attributes by supplying them before the inner set of brackets: `{div id='hp' {$hp}}` will result in `<div id='hp' role='update-wrapper' aria-live='polite'>`.
 
 ### Variable types ###
 
