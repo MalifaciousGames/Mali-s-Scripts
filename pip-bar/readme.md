@@ -68,7 +68,7 @@ About Snowman : Out of the 4 main story formats, Snowman is not currently suppor
 
 ---
 
-### Presets
+### Built-in presets
 
 | Name | Token | Effects
 |:------------:|:------------:|:------------:|
@@ -85,3 +85,27 @@ About Snowman : Out of the 4 main story formats, Snowman is not currently suppor
 | `stars4` | '⯌,⯎' | None
 | `ascii` | 'l,l' | Single token, the empty part is .5 opacity 
 | `hearts` | '♡,♡' | Single token, the empty part is .5 opacity 
+
+### Defining your own presets
+
+New presets can be added by calling `PipBar.addPreset(name, definition)`.
+
+```js
+// alias of an existing preset
+PipBar.addPreset('myPreset', 'stars');
+
+// comma-separated tokens
+PipBar.addPreset('myPreset', '★,☆');
+
+// plain object with 'full' and 'empty' properties :
+PipBar.addPreset('myPreset', {
+   // can be a token string :
+   full : '★',
+   // or an object containing a "token" and optional "class" and "style" to apply to this part of the bar
+   empty : {
+      token : '☆',
+      class : 'css classes',
+      style : 'inline styles'
+   }
+});
+```

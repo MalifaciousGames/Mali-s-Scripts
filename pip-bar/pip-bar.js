@@ -1,3 +1,5 @@
+// Mali's <pip-bar> custom element
+
 ; ((onPage = 0) => {
 
    const format = document.querySelector('tw-storydata').getAttribute('format'),
@@ -20,41 +22,6 @@
 
 
    const config = {
-      name: 'pip-bar',
-
-      presets: {
-         default: '◼,◻',
-         round: '◉,◎',
-         hexa: '⬢,⬡',
-         hexalong: '⬣,⎔',
-         penta: '⬟,⬠',
-         pentalong: '⭓,⭔',
-         diamond: '◈,◇',
-         bar: '𝅛,𝅚',
-         xcom: '▰,▱',
-         sonata: '☐,☒',
-         stars: '★,☆',
-         stars4: '⯌,⯎',
-         ascii: {
-            full: 'l',
-            empty: {
-               token: 'l',
-               style: 'opacity: .5;'
-            }
-         },
-         hearts: {
-            full: '♡',
-            empty: {
-               token: '♡',
-               style: 'opacity: .5;'
-            }
-         }
-      },
-      classes: {
-         full: 'full-bar',
-         empty: 'empty-bar',
-         main: 'pip-bar'
-      },
       default: {
          max: 5,
          value: 0
@@ -75,14 +42,14 @@
          console.warn(`Couldn't coerce '${v}' into a number, we tried tho.`);
          num = 0;
       };
-      
+
       return num;
    };
 
    function numSetter(v) {
       if (typeof v === 'number') v = '' + v;
 
-      //need to be computed
+      // needs to be computed
       if (isNaN(Number(v)) && !this.hasVariable) {
          this.hasVariable = true;
          onPage++;
@@ -94,7 +61,7 @@
       return v;
    };
 
-  window.PipBar = class extends HTMLElement {
+   window.PipBar = class extends HTMLElement {
       constructor() {
          super();
 
@@ -120,7 +87,7 @@
 
          if (typeof prs === 'string') {
             // a valid preset name, call the setter again, with the object
-            if (config.presets[prs]) return this.preset = config.presets[prs];
+            if (PipBar.presets[prs]) return this.preset = PipBar.presets[prs];
 
             const [full = '', empty = ''] = prs.split(',');
             this._preset = {
@@ -150,20 +117,20 @@
 
          const def = this.preset[type],
             token = def.token,
-            cls = config.classes[type] + (def?.class ?? ''),
+            cls = PipBar.classes[type] + (def?.class ?? ''),
             bar = ''.padEnd(val * token.length, token),
             stl = def?.style ?? '';
 
          return `<span class='${cls}' style='${stl}'>${bar}</span>`;
       }
 
-      printValue() {
+      printValue(attrChange) {
          const val = this.value, max = this.max, excerpt = val + ' out of ' + max;
 
          // didn't change, don't re-render
-         if (excerpt === this.excerpt) return;
+         if (!attrChange && excerpt === this.excerpt) return;
 
-         this.innerHTML = this.baseText + `<span class='${config.classes.main}'>` + this.buildBar(val, 'full') + this.buildBar(max - val, 'empty') + `</span>`;
+         this.innerHTML = this.baseText + `<span class='${PipBar.classes.main}'>` + this.buildBar(val, 'full') + this.buildBar(max - val, 'empty') + `</span>`;
 
          this.setAttribute('aria-label', this.excerpt = excerpt);
       }
@@ -191,7 +158,7 @@
                this[n] = val;
          }
 
-         if (this.isConnected) this.printValue();
+         if (this.isConnected) this.printValue(true);
 
       }
 
@@ -206,11 +173,63 @@
                if (el.hasVariable) el.printValue();
             }, 20);
          });
+      };
+
+      static classes = {
+         full: 'full-bar',
+         empty: 'empty-bar',
+         main: 'pip-bar'
+      };
+
+      static presets = {
+
+         default: '◼,◻',
+         round: '◉,◎',
+         hexa: '⬢,⬡',
+         hexalong: '⬣,⎔',
+         penta: '⬟,⬠',
+         pentalong: '⭓,⭔',
+         diamond: '◈,◇',
+         bar: '𝅛,𝅚',
+         xcom: '▰,▱',
+         sonata: '☐,☒',
+         stars: '★,☆',
+         stars4: '⯌,⯎',
+         ascii: {
+            full: 'l',
+            empty: {
+               token: 'l',
+               style: 'opacity: .5;'
+            }
+         },
+         hearts: {
+            full: '♡',
+            empty: {
+               token: '♡',
+               style: 'opacity: .5;'
+            }
+         }
+
+      };
+
+      static addPreset(id, def) {
+
+         // alias
+         if (this.presets[def]) return this.presets[id] = this.presets[def];
+
+         if (typeof def === 'string' && !def.includes(','))
+            throw new Error('Preset string must contains 2 comma-separated tokens!');
+
+         if (typeof def === 'object' && !(def.hasOwnProperty('full') || def.hasOwnProperty('empty')))
+            throw new Error('Preset object must have an "empty" and "full" property!');
+
+         this.presets[id] = def;
       }
+
    };
 
    // custom elem
-   customElements.define(config.name, PipBar);
+   customElements.define('pip-bar', PipBar);
 
    // listeners
    window.addEventListener("click", PipBar.updateAll, true);
@@ -219,3 +238,5 @@
    }, true);
 
 })();
+
+// End of the <pip-bar> code
