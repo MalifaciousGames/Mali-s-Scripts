@@ -8,11 +8,11 @@ The script lets you import and export saves for the Harlowe story format.
 
 The `harloweSave.export(slot, encode)` function accepts two optional arguments:
 - the name of an existing save slot to export
-- a boolean specifying if the save data is encoded to Base64, `true` by default
+- a boolean specifying if the save data should be encoded to Base64, `true` by default
 
 The `harloweSave.import(toLocal, slotName, slotLabel)` function accepts three optional arguments:
-- a boolean specifying if the imported save must be added to local storage (rather than simply loaded into game)
-- the name of the target slot 
+- a boolean specifying if the imported save should be added to local storage (rather than just loaded as a new state)
+- the name of the target slot
 - the label of the target slot
 
 To run these functions in Harlowe I suggest using either a `<script>` element or binding them to a link's `onclick` attribute:
