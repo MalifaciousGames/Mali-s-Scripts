@@ -1,0 +1,1 @@
+This lets users skip the `<<type>>` animation on mobile by pressing down for a set amount of time (200ms by default).
