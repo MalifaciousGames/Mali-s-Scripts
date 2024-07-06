@@ -24,7 +24,7 @@ setPath('C:/Users/Maliface/Documents/fake/folder/media');
 1. Open the file explorer and navigate to the folder
 2. Copy the file path, example: `C:\Users\Name\Documents\firstgame\assets`
 3. Change `\` characters to `/` characters (Windows only issue)
-4. Paste it in the `setPath` function : `setPath('C:\Users\Name\Documents\firstgame\assets');`
+4. Paste it in the `setPath` function : `setPath('C:/Users/Name/Documents/firstgame/assets');`
 
 **Online hosting**
 
