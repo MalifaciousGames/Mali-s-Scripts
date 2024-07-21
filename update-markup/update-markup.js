@@ -1,23 +1,32 @@
 /* Mali's update markup */
 
-((isCooldown = false, onPage = 0) => {
+((isCooldown = false) => {
    const shadowHandler = Wikifier.helpers.shadowHandler || Wikifier.helpers.createShadowSetterCallback;
+
+   const wrappers = [];
 
    // Update function
    const updateWrappers = () => {
       if (isCooldown) return;
 
-      const found = $('[role="update-wrapper"]');
-      if (!found.length) onPage = 0;
-      if (!onPage) return;
+      let i = wrappers.length - 1;
 
-      found.each((_, el) => el.update());
+      while (i >= 0) {
+         const { wrapper, shadowGetter } = wrappers[i];
+
+         // out of DOM, remove it
+         if (!wrapper.isConnected) {
+            wrappers.splice(i--, 1);
+            continue;
+         }
+
+         wrapper.innerText = stringFrom(shadowGetter());
+         i--;
+      }
+
       isCooldown = true;
-      setTimeout(() => isCooldown = false, 100);
+      setTimeout(() => isCooldown = false, 150);
    };
-
-   // Exports.
-   setup.updateWrappers = updateWrappers;
 
    Wikifier.Parser.add({
       name: 'updateMarkup',
@@ -25,22 +34,24 @@
       handler(w) {
 
          const [_, elem, raw] = w.matchText.match(/{(.*?){(.*?)}}/),
-            wrapper = $(`<${elem.trim() || 'span'} role='update-wrapper' aria-live='polite'>`)[0],
-            getShadow = shadowHandler(`State.getVar("${raw.replace(/"|'|`/g, m => `\\${m}`)}")`);
+            wrapper = $(`<${elem.trim() || 'span'} aria-live='polite'>`)[0];
+
+         // push reference object
+         wrappers.push({
+            wrapper,
+            shadowGetter: shadowHandler(`State.getVar("${raw.replace(/"|'|`/g, m => `\\${m}`)}")`)
+         });
 
          wrapper.innerText = stringFrom(State.getVar(raw));
-
-         wrapper.update = function () {
-            const str = stringFrom(getShadow());
-            if (str !== this.innerText) this.innerText = str;
-         };
-
-         onPage++;
 
          w.output.appendChild(wrapper);
       }
    });
 
-   $(document).on('change click drop refreshUpdateContainers', updateWrappers);
+   $(document).on('change click drop keyup', updateWrappers);
+
+   // Exports.
+   setup.updateWrappers = updateWrappers;
+
    Wikifier.Parser.Profile.compile();
 })();

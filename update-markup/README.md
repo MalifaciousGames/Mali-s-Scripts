@@ -22,7 +22,7 @@ Item at index {{$num}} is {{$array[$num]}}
 
 ### HTML output ###
 
-By default, the `{{}}` macro creates a `<span role='update-wrapper' aria-live='polite'>`. You can modify the element's type and html attributes by supplying them before the inner set of brackets: `{div id='hp' {$hp}}` will result in `<div id='hp' role='update-wrapper' aria-live='polite'>`.
+By default, the `{{}}` macro creates a `<span aria-live='polite'>`. You can modify the element's type and html attributes by supplying them before the inner set of brackets: `{div id='hp' {$hp}}` will result in `<div id='hp' aria-live='polite'>`.
 
 ### Variable types ###
 
@@ -31,16 +31,18 @@ Consequently, namespaces and syntaxes that don't normally work with [sugarcube's
 
 ### Input-less updating ###
 
-The current script relies on `click` and `change` events to check for value changes. This handles most of the common means of variables modification (clicking a link, using an input element).
-However, there may be situations in which you want variables to update without player input. In this case, you need to run the `setup.updateWrappers()` function.
+The script updates wrappers based on 4 events : `change click drop keyup`, which make up for the vast majority of variable changes.
+
+Still, you might want to cause such update programmatically by calling the `setup.updateWrappers()` function.
 
 ```html
 <<set $time = 0>>
 
-Time passes, it is now {{$time}} .
+Time passes.
+You have been there for {{$time}} second{{$time !== 1? 's' : ''}}.
 
 <<silently>>
-  <<repeat 2s>>
+  <<repeat 1s>>
     <<set $time++, setup.updateWrappers()>>
   <</repeat>>
 <</silently>>
