@@ -2,9 +2,9 @@
 window.setPath = url => {
 
 	const twUrls = [
-		'AppData/Local', 'var/folders', '/tmp', //OS temp paths for older versions of Twine
-		'Twine/Scratch', //2.8 scratch folder
-		'twinery' //website
+		'AppData/Local', 'var/folders', '/tmp', // OS temp paths for older versions of Twine
+		'Twine/Scratch', // 2.8 scratch folder
+		'twinery' // website
 	], hotUrl = url.startsWith('http');
 
 	// not a twine launch
@@ -23,13 +23,13 @@ window.setPath = url => {
 	url = url.replaceAll('\\', '/');
 	if (url.at(-1) !== '/') url += '/';
 
-	//build base element
+	// build base element
 	const base = document.createElement('base');
 	base.setAttribute('href', url);
 	document.head.append(base);
 
-	//reload stylesheets
-	[...document.getElementsByTagName('style')].forEach(e => e.innerText = e.innerText);
+	// reload stylesheets, on a slight delay because of Harlowe
+	requestAnimationFrame(() => [...document.getElementsByTagName('style')].forEach(e => e.innerText = e.innerText));
 
 };
 
