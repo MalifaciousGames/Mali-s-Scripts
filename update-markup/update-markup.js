@@ -20,7 +20,8 @@
             continue;
          }
 
-         wrapper.innerText = stringFrom(shadowGetter());
+         const cnt = stringFrom(shadowGetter());
+         if (wrapper.innerText !== cnt) wrapper.innerText = cnt;
          i--;
       }
 
