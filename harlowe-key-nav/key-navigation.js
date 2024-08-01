@@ -19,12 +19,12 @@
       historyControl(e) {
 
          if (e.code === 'ArrowRight') {
-            const $b = this.story.find('tw-icon[title=Redo]');
+            const $b = this.story.find('tw-icon[title=Redo]:visible');
             if ($b.css('visibility') !== 'hidden') return $b.click();
          }
 
          if (e.code === 'ArrowLeft') {
-            const $b = this.story.find('tw-icon[title=Undo]');
+            const $b = this.story.find('tw-icon[title=Undo]:visible');
             if ($b.css('visibility') !== 'hidden') return $b.click();
          }
 
