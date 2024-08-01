@@ -1,5 +1,4 @@
-// Key navigation for Harlowe by Maliface
-// WIP
+/* Mali's key navigation for Harlowe */
 
 (() => {
 
@@ -66,3 +65,5 @@
    window.addEventListener('keyup', KeyNav.process.bind(KeyNav));
 
 })();
+
+/* End of key navigation script */
