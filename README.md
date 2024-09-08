@@ -1,16 +1,34 @@
+# Custom elements
+
+A selection of HTML custom elements, usable in any story format.
+
+<details>
+<summary>The Cycle element</summary>
+
+[An element which automatically cycles between its children.](custom-elements/cycle-element)
+
+</details>
+
+
+<details>
+<summary>The Pip Bar</summary>
+
+[Customizable stat bars, meant for ASCII displays.](custom-elements/pip-bar)
+
+</details>
+
+<details>
+<summary>The Ring Menu</summary>
+
+[An element which adjusts its children into a ring.](custom-elements/pip-bar)
+
+</details>
+
 ## Container templates
 
 A variation on Sugarcube templates that supports user-supplied contents: `?(templateName: ...contents...)`.
 
 [Container templates](container-template-markup)
-
-***
-
-## The cycle custom element
-
-A custom element that automatically cycles its contents. Can be used in any story format.
-
-[Cycle element](cycle-element)
 
 ***
 
