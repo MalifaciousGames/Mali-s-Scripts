@@ -6,6 +6,7 @@ Various JS APIs.
 <summary>Import/Export API</summary>
 
 Save or load arbitrary data as files.
+
 [Import/Export API](apis/import-export)
 
 </details>
@@ -19,7 +20,9 @@ A selection of HTML custom elements, usable in any story format.
 <details>
 <summary>The Cycle element</summary>
 
-[An element which automatically cycles between its children.](custom-elements/cycle-element)
+An element which automatically cycles between its children.
+
+[Cycle element](custom-elements/cycle-element)
 
 </details>
 
@@ -27,14 +30,18 @@ A selection of HTML custom elements, usable in any story format.
 <details>
 <summary>The Pip Bar</summary>
 
-[Customizable stat bars, meant for ASCII displays.](custom-elements/pip-bar)
+Customizable stat bars, meant for ASCII displays.
+
+[Pip Bar](custom-elements/pip-bar)
 
 </details>
 
 <details>
 <summary>The Ring Menu</summary>
 
-[An element which adjusts its children into a ring.](custom-elements/ring-menu)
+An element which orders its children into a ring.
+
+[Ring menu](custom-elements/ring-menu)
 
 </details>
 
@@ -48,6 +55,7 @@ Format-agnostic scripts for Twine games.
 <summary>Media tester</summary>
 
 A script to test asset availability in Twine games.
+
 [Media tester](twine-scripts/media-tester)
 
 </details>
@@ -56,6 +64,7 @@ A script to test asset availability in Twine games.
 <summary>Special passage tags</summary>
 
 Enable `script` and `style` passages in Twine 2.
+
 [Special tags](twine-scripts/special-passage-tags)
 
 </details>
@@ -64,6 +73,7 @@ Enable `script` and `style` passages in Twine 2.
 <summary>URL fixer</summary>
 
 Properly localize URLs when using Twine's `Play/Test` feature to launch the game.
+
 [URL fixer](twine-scripts/url-fixer)
 
 </details>
@@ -78,6 +88,7 @@ Scripts written for the Harlowe story format.
 <summary>Keyboard navigation</summary>
 
 Automatically binds shortcuts to interactive elements, enabling keyboard-only navigation.
+
 [Keyboard navigation](harlowe-scripts/key-nav)
 
 </details>
@@ -86,6 +97,7 @@ Automatically binds shortcuts to interactive elements, enabling keyboard-only na
 <summary>Link sound</summary>
 
 Define a sound effect for every link in a story.
+
 [Link sound](harlowe-scripts/link-sound)
 
 </details>
@@ -100,14 +112,16 @@ Scripts written for the Sugarcube story format that aren't macros.
 <summary>Container templates</summary>
 
 A variation on Sugarcube templates that supports user-supplied contents: `?(templateName: ...contents...)`.
+
 [Container templates](sugarcube-scripts/container-template-markup)
 
 </details>
 
 <details>
-<summary>`<<type>>` skip for mobile</summary>
+<summary>Type macro skip for mobile</summary>
 
 A way to skip the `<<type>>` animation on mobile devices.
+
 [Type skip](sugarcube-scripts/mobile-type-skip)
 
 </details>
@@ -116,6 +130,7 @@ A way to skip the `<<type>>` animation on mobile devices.
 <summary>Swap markup</summary>
 
 An easy way to output random content with minimal markup: `(a|b|c|d)`.
+
 [Swap markup](sugarcube-scripts/swap-markup)
 
 </details>
@@ -124,6 +139,7 @@ An easy way to output random content with minimal markup: `(a|b|c|d)`.
 <summary>Update markup</summary>
 
 Print a variable and automatically update the displayed value when it changes using `{{$myVariable}}`.
+
 [Update markup](sugarcube-scripts/update-markup)
 
 </details>
