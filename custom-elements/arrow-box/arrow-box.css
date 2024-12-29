@@ -1,0 +1,47 @@
+arrow-box {
+   display: inline-flex;
+   justify-content: space-between;
+   align-items: center;
+   gap: .25em;
+}
+
+arrow-box>option {
+   display: none;
+}
+
+arrow-box>button {
+   background-color: transparent;
+   color: #444;
+   font-weight: bold;
+   border: none;
+   padding: 0;
+   font-size: 1.25em;
+   cursor: pointer;
+   transition: .25s;
+}
+
+arrow-box>span {
+   border: 2px solid #444;
+   padding: .25em 1em;
+   text-align: center;
+   transition: .25s;
+
+}
+
+arrow-box>button:hover,
+arrow-box:focus>button {
+   color: #920000;
+}
+
+arrow-box:focus>span {
+   border-color: #920000;
+}
+
+/* vertical variation */
+arrow-box[vertical] {
+   flex-direction: column;
+}
+
+arrow-box[vertical]>button {
+   rotate: 90deg;
+}
