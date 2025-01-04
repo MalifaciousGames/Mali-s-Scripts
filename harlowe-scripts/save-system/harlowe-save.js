@@ -41,14 +41,14 @@ window.harloweSave = {
 
       const url = URL.createObjectURL(new Blob([json], { type: 'text/plain' }));
       $('<a>').prop({
-         href : url,
-         download : this.fileName + this.extension
+         href: url,
+         download: this.fileName + this.extension
       })[0].click();
 
       setTimeout(() => URL.revokeObjectURL(url), 40);
    },
 
-   decode (json) {
+   decode(json) {
 
       //is encoded
       if (json[0].trim() !== '{') json = atob(json).replace(/UNI\((\d+)\)/g, (m, n) => String.fromCodePoint(n));
@@ -68,7 +68,7 @@ window.harloweSave = {
    import(toLocal = false, asSlot, withLabel) {
       const dataHandler = data => {
 
-         const {slot, state } = this.decode(data);
+         const { slot, state } = this.decode(data);
 
          const name = asSlot ?? slot.name, label = withLabel ?? slot.label;
 
@@ -78,7 +78,7 @@ window.harloweSave = {
          }
 
          State.deserialise(Section.create(), state);
-         requestAnimationFrame(Engine.showPassage.bind(Engine, State.passage, { loadedGame: true }));
+         this.playLast();
 
       };
 
@@ -90,5 +90,17 @@ window.harloweSave = {
          })
          .click();
 
+   },
+
+   playLast() {
+      const passage = State.history().at(-1);
+
+      requestAnimationFrame(
+         () => Engine.showPassage(passage || State.passage, { loadedGame: true })
+      );
    }
 };
+
+$('#cycle-hair-length').on('click', () => {
+   triggerEvent(':redo', document, { detail: { tags: [] } });
+});
