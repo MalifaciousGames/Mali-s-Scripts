@@ -100,7 +100,3 @@ window.harloweSave = {
       );
    }
 };
-
-$('#cycle-hair-length').on('click', () => {
-   triggerEvent(':redo', document, { detail: { tags: [] } });
-});
