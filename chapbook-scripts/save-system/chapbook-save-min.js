@@ -1,0 +1,16 @@
+/* Mali's save system for chapbook */
+window.SaveSystem={getFileName(e){switch(typeof this.config.fileName){case"string":return this.config.fileName;case"function":return this.config.fileName.call(null,e)}const[t,n,a]=(new Date).toJSON().match(/(.+)T(.+)(?=\.)/);return engine.story.name()+"-save-"+n+"-"+a},lastState:null,currentState:engine.state.saveToObject(),export(){const e={game:{ifid:engine.story.ifid(),version:this.config.version},state:this.lastState??this.currentState??engine.state.saveToObject(),chapbook:{version:engine.version}};e.state.trail??=[],e.state.trail.push(engine.state.get("trail").at(-1)),"function"==typeof this.config.metadata?e.metadata=this.config.metadata.call(null,e):this.config.metadata&&(e.metadata=this.config.metadata);let t=JSON.stringify(e);this.config.encoded&&(t=btoa(t.replace(/[^\x00-\x7F]/g,(e=>`u<(${e.codePointAt(0)}>`))));const n=URL.createObjectURL(new Blob([t],{type:"text/plain"})),a=document.createElement("a");a.href=n,a.download=this.getFileName()+this.config.extension,a.click(),requestAnimationFrame((()=>URL.revokeObjectURL(n)))},import(){const e=document.createElement("input");e.type="file",e.accept=this.extension,e.onchange=()=>{const t=new FileReader;t.onload=()=>this.saveHandler(t.result),t.readAsText(e.files[0])},e.click()},saveHandler(e){let t;"{"!==e.trim()[0]&&(e=atob(e).replace(/u<(\d+)>/g,((e,t)=>String.fromCodePoint(t))));try{t=JSON.parse(e)}catch(e){throw new Error("Save file could not be parsed into a usable object, sorry.")}const{game:n,state:a,chapbook:i}=t;if(!a)throw new Error("Save file is lacking a state object, something went very wrong.");if(n.ifid!==engine.story.ifid())throw new Error("Save file does not come from this game.");if(i.version!==engine.version&&this.config.engineUpdaters?.length)for(const e of this.config.engineUpdaters)e.call(null,t,i.version,engine.version);if(n.version!==this.config.version&&this.config.gameUpdaters?.length)for(const e of this.config.gameUpdaters)e.call(null,t,n.version,this.config.version);try{engine.state.restoreFromObject(a)}catch(e){throw new Error("Chapbook was unable to restore the saved state, this is an internal error.")}}},engine.extend("2.0.0",(()=>{window.addEventListener("body-content-change",(()=>{SaveSystem.lastState=structuredClone(SaveSystem.currentState),SaveSystem.currentState=engine.state.saveToObject()})),window.addEventListener("click",(e=>{const t=e.target.getAttribute("data-save");t&&SaveSystem[t]()})),engine.template.inserts.add({match:/^load save/i,render:e=>`<a class="link" tabindex="0" role="link" data-save="import">${e??"Load from file"}</a>`}),engine.template.inserts.add({match:/^save to file/i,render:e=>`<a class="link" tabindex="0" role="link" data-save="export">${e??"Save to file"}</a>`})}));
+
+window.SaveSystem.config = {
+   fileName: null, // a string or function that returns one
+   extension: '.tw-save', // the file's extension
+   encoded: true, // whether the save is encoded to base64 (larger but not human-readable)
+   version: null, // the game version, can be anything
+   metadata: null, // arbitrary data or a function that returns it
+
+   // where you put callbacks responsible for updating saves from older versions of CHAPBOOK
+   engineUpdaters: [],
+
+   // where you put callbacks responsible for updating saves from older GAME versions
+   gameUpdaters: []
+};
