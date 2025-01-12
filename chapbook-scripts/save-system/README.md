@@ -5,6 +5,7 @@ This scripts enables save to and load from files in Chapbook
 ### Inserts
 
 `{save to file: 'Optional link text'}` creates a link which triggers the download of the current game save.
+
 `{load save: 'Optional link text'}` creates a link which lets the player select a save file to load.
 
 ### Config options
