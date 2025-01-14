@@ -8,7 +8,7 @@ The `#` character in a URL is used to introduce a fragment identifier. In typica
 
 With this script, this fragment identifier is used to play a given story passage, either on game start or when it is modified.
 
-`https://hostingSite.org/#forest` => The story will start at the `forest` passage.
+`https://hostingSite.org/myGame#forest` => The story will start at the `forest` passage.
 
 This can be used as a debugging tool or as a way to link directly to a relevant passage.
 
@@ -19,3 +19,5 @@ The `HashNavigation` object contains two config options:
 - `hashChangeNavigation` : Modifying the URL's hash value will cause navigation to the corresponding passage.
 
 Do keep in mind that while `hashChangeNavigation` lets players navigate at will they can still do so with `hashStart` alone by changing the value and refreshing the page.
+
+**A version of this script exists for Harlowe and can be found [here](https://github.com/MalifaciousGames/Mali-s-Scripts/tree/main/harlowe-scripts/hash-navigation).**
