@@ -1,9 +1,9 @@
 /* Mali's hash navigation for Harlowe*/
-{
-   const HashNavigation = {
+;{
+   const HNav = {
       config: {
-         hashStart: true,
-         hashChangeNavigation: true
+         startAt: true,
+         navigateTo: true
       },
       getHash() {
          return decodeURIComponent(location.hash.slice(1).trim());
@@ -11,16 +11,22 @@
       setHash(value) {
          return location.hash = encodeURIComponent(value);
       },
-      hasPassage(name) {
-         return !!document.querySelector(`tw-passagedata[name="${name}"]`);
+      canTravel(psg, mode) {
+         if (!document.querySelector(`tw-passagedata[name="${psg}"]`)) return false;
+
+         const config = this.config[mode];
+
+         if (Array.isArray(config)) return config.includes(psg);
+
+         return config;
       }
    };
 
-   if (HashNavigation.config.hashStart) {
+   if (HNav.config.startAt) {
 
-      const fromHash = HashNavigation.getHash();
+      const fromHash = HNav.getHash();
 
-      if (fromHash.length && HashNavigation.hasPassage(fromHash)) {
+      if (fromHash.length && HNav.canTravel(fromHash, 'startAt')) {
          Engine.goToPassage(fromHash);
          State.timeline.shift();
          location.hash = '';
@@ -28,20 +34,18 @@
 
    };
 
-   if (HashNavigation.config.hashChangeNavigation) {
+   if (HNav.config.navigateTo) {
 
       window.addEventListener('hashchange', () => {
-         const newHash = HashNavigation.getHash();
+         const newHash = HNav.getHash();
 
          if (!newHash.length) return;
 
-         if (HashNavigation.hasPassage(newHash)) {
+         if (HNav.canTravel(newHash, 'navigateTo')) {
             Engine.goToPassage(newHash);
             location.hash = '';
-         } else {
-            console.warn(`No "${newHash}" passage available!`);
          }
 
       });
    }
-}
+};

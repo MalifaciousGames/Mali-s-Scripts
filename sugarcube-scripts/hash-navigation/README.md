@@ -14,10 +14,12 @@ This can be used as a debugging tool or as a way to link directly to a relevant 
 
 ## Config
 
-The `HashNavigation` object contains two config options:
-- `hashStart` : The story starts at the passage that corresponds to the link's hash value.
-- `hashChangeNavigation` : Modifying the URL's hash value will cause navigation to the corresponding passage.
+The `HNAv` object contains two config options which can be either `true` or an array of allowed passage names :
+- `startAt` : The story starts at the passage that corresponds to the link's hash value.
+- `navigateTo` : Modifying the URL's hash value will cause navigation to the corresponding passage.
 
-Do keep in mind that while `hashChangeNavigation` lets players navigate at will they can still do so with `hashStart` alone by changing the value and refreshing the page.
+Do keep in mind that while `navigateTo` lets players navigate at will they can still do so with `startAt` alone by changing the value and refreshing the page.
+
+The `HNAv` object can be accessed via `setup.HNAv`.
 
 **A version of this script exists for Harlowe and can be found [here](https://github.com/MalifaciousGames/Mali-s-Scripts/tree/main/harlowe-scripts/hash-navigation).**

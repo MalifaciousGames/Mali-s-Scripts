@@ -1,7 +1,5 @@
 # APIs
 
-Various JS APIs.
-
 <details>
 <summary>Import/Export API</summary>
 
@@ -15,7 +13,16 @@ Save or load arbitrary data as files.
 
 # Custom elements
 
-A selection of HTML custom elements, usable in any story format.
+A selection of HTML custom elements.
+
+<details>
+<summary>The Arrow Box element</summary>
+
+A type of input element that can be cycled in various ways.
+
+[Arrow element](custom-elements/arrow-box)
+
+</details>
 
 <details>
 <summary>The Cycle element</summary>
@@ -85,20 +92,38 @@ Properly localize URLs when using Twine's `Play/Test` feature to launch the game
 Scripts written for the Harlowe story format.
 
 <details>
-<summary>Keyboard navigation</summary>
+   <summary>Hash navigation</summary>
 
-Automatically binds shortcuts to interactive elements, enabling keyboard-only navigation.
+   Enables linking to passages inside the story via the URL's hash value.
 
-[Keyboard navigation](harlowe-scripts/key-nav)
+   [Hash navigation](harlowe-scripts/hash-navigation)
 
 </details>
 
 <details>
-<summary>Link sound</summary>
+   <summary>Keyboard navigation</summary>
 
-Define a sound effect for every link in a story.
+   Automatically binds shortcuts to interactive elements, enabling keyboard-only navigation.
 
-[Link sound](harlowe-scripts/link-sound)
+   [Keyboard navigation](harlowe-scripts/key-nav)
+
+</details>
+
+<details>
+   <summary>Link sound</summary>
+
+   Define a sound effect for every link in a story.
+
+   [Link sound](harlowe-scripts/link-sound)
+
+</details>
+
+<details>
+   <summary>Save system</summary>
+
+   Functions that enable save to and loading from file in Harlowe.
+
+   [Save system](harlowe-scripts/save-system)
 
 </details>
 
@@ -109,37 +134,54 @@ Define a sound effect for every link in a story.
 Scripts written for the Sugarcube story format that aren't macros.
 
 <details>
-<summary>Container templates</summary>
+   <summary>Container templates</summary>
 
-A variation on Sugarcube templates that supports user-supplied contents: `?(templateName: ...contents...)`.
+   A variation on Sugarcube templates that supports user-supplied contents: `?(templateName: ...contents...)`.
 
-[Container templates](sugarcube-scripts/container-template-markup)
+   [Container templates](sugarcube-scripts/container-template-markup)
+</details>
+
+<details>
+   <summary>Extra markup</summary>
+
+   Adds additional functionalities to the link markup.
+
+   [Extra markup](sugarcube-scripts/extra-markup)
 
 </details>
 
 <details>
-<summary>Type macro skip for mobile</summary>
+   <summary>Hash navigation</summary>
 
-A way to skip the `<<type>>` animation on mobile devices.
+   Enables linking to passages inside the story via the URL's hash value.
 
-[Type skip](sugarcube-scripts/mobile-type-skip)
-
-</details>
-
-<details>
-<summary>Swap markup</summary>
-
-An easy way to output random content with minimal markup: `(a|b|c|d)`.
-
-[Swap markup](sugarcube-scripts/swap-markup)
+   [Hash navigation](sugarcube-scripts/hash-navigation)
 
 </details>
 
 <details>
-<summary>Update markup</summary>
+   <summary>Swap markup</summary>
 
-Print a variable and automatically update the displayed value when it changes using `{{$myVariable}}`.
+   An easy way to output random content with minimal markup: `(a|b|c|d)`.
 
-[Update markup](sugarcube-scripts/update-markup)
+   [Swap markup](sugarcube-scripts/swap-markup)
+
+</details>
+
+<details>
+   <summary>Type macro skip for mobile</summary>
+
+   A way to skip the `<<type>>` animation on mobile devices.
+
+   [Type skip](sugarcube-scripts/mobile-type-skip)
+
+</details>
+
+<details>
+   <summary>Update markup</summary>
+
+   Print a variable and automatically update the displayed value when it changes using `{{$myVariable}}`.
+
+   [Update markup](sugarcube-scripts/update-markup)
 
 </details>

@@ -1,51 +1,58 @@
 /* Mali's hash navigation */
 
-{
-   const HashNavigation = {
+;{
+   const HNav = {
       config: {
-         hashStart: true,
-         hashChangeNavigation: true
+         startAt: true,
+         navigateTo: true
       },
       getHash() {
          return decodeURIComponent(location.hash.slice(1).trim());
       },
       setHash(value) {
          return location.hash = encodeURIComponent(value);
+      },
+      canTravel(psg, mode) {
+         if (!Story.has(psg)) return false;
+
+         const config = this.config[mode];
+
+         if (Array.isArray(config)) return config.includes(psg);
+
+         return config;
       }
    };
 
-   if (HashNavigation.config.hashStart) {
-      let storyData = $('tw-storydata'), startName = 'Start';
+   if (HNav.config.startAt) {
+
+      let storyData = $('tw-storydata'), startName = 'Start', fromHash = HNav.getHash();
 
       if (storyData.attr('creator') === 'Twine') {
          const startID = storyData.attr('startnode');
          startName = $(`[pid="${startID}"]`).attr('name');
       }
 
-      const fromHash = HashNavigation.getHash();
-
-      if (fromHash.length && Story.has(fromHash)) {
-         Config.passages.start = fromHash;
+      if (fromHash.length && HNav.canTravel(fromHash, 'startAt')) {
+         startName = fromHash;
          location.hash = '';
-      } else {
-         Config.passages.start = startName;
       }
 
+      Config.passages.start = startName;
    };
 
-   if (HashNavigation.config.hashChangeNavigation) {
+   if (HNav.config.navigateTo) {
+
       window.addEventListener('hashchange', () => {
-         const newHash = HashNavigation.getHash();
+         const newHash = HNav.getHash();
 
          if (!newHash.length) return;
 
-         if (Story.has(newHash)) {
+         if (HNav.canTravel(newHash, 'navigateTo')) {
             Engine.play(newHash);
             location.hash = '';
-         } else {
-            console.warn(`Story does not have a "${newHash}" passage.`);
          }
-
       });
    }
-}
+
+   setup.HNav = HNav;
+};
