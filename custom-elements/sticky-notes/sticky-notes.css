@@ -1,0 +1,162 @@
+sticky-note {
+   position: fixed;
+
+   width: 12em;
+   height: 10em;
+   padding: .5em;
+   padding-top: 2.5em;
+
+   display: flex;
+   flex-direction: column;
+
+   color: #111;
+   box-shadow: 0 0 .5em black;
+   user-select: none;
+}
+
+sticky-note>a.unstick {
+
+   position: absolute;
+   top: 0;
+   left: 0;
+
+   height: 2em;
+   width: 100%;
+
+   display: grid;
+   place-items: center;
+   text-decoration: none;
+
+   background-color: rgba(88, 88, 88, 0.25);
+
+   cursor: pointer;
+}
+
+sticky-note>a.unstick::after {
+   position: absolute;
+   content: 'Remove';
+   opacity: 0;
+   text-transform: uppercase;
+   font-weight: bold;
+   font-size: 1.5em;
+   margin: auto;
+   letter-spacing: .5em;
+   transition: .3s;
+}
+
+sticky-note>a.unstick:hover::after {
+   opacity: 1;
+}
+
+
+/* color presets */
+sticky-note,
+sticky-note.yellow {
+   background-color: rgb(231, 231, 106);
+
+   a.unstick::after {
+      color: rgb(231, 231, 106);
+   }
+}
+
+sticky-note.green {
+   background-color: rgb(120, 240, 136);
+
+   a.unstick::after {
+      color: rgb(120, 240, 136);
+   }
+}
+
+sticky-note.red {
+   background-color: rgb(241, 101, 101);
+
+   a.unstick::after {
+      color: rgb(241, 101, 101);
+   }
+}
+
+sticky-note.pink {
+   background-color: rgb(241, 101, 187);
+
+   a.unstick::after {
+      color: rgb(241, 101, 187);
+   }
+}
+
+sticky-note.blue {
+   background-color: rgb(131, 205, 255);
+
+   a.unstick::after {
+      color: rgb(131, 205, 255);
+   }
+}
+
+/* fall animation */
+
+sticky-note.sticky-fall {
+   pointer-events: none;
+   transition: .2s;
+}
+
+sticky-note.fall-left {
+   animation: fall-left 3s ease-in-out;
+}
+
+@keyframes fall-left {
+   0% {
+      margin-top: 0;
+   }
+
+   40% {
+      rotate: 30deg;
+      translate: -10em 0;
+   }
+
+   50% {
+      opacity: 1;
+   }
+
+   80% {
+      rotate: -30deg;
+      translate: 10em 0;
+   }
+
+   100% {
+      rotate: 0deg;
+      translate: 0 0;
+      opacity: 0;
+      margin-top: 100vh;
+   }
+}
+
+
+sticky-note.fall-right {
+   animation: fall-right 3s ease-in-out;
+}
+
+@keyframes fall-right {
+   0% {
+      margin-top: 0;
+   }
+
+   40% {
+      rotate: -30deg;
+      translate: 10em 0;
+   }
+
+   50% {
+      opacity: 1;
+   }
+
+   80% {
+      rotate: 30deg;
+      translate: -10em 0;
+   }
+
+   100% {
+      rotate: 0deg;
+      translate: 0 0;
+      opacity: 0;
+      margin-top: 100vh;
+   }
+}
