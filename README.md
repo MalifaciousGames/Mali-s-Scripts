@@ -52,6 +52,16 @@ An element which orders its children into a ring.
 
 </details>
 
+<details>
+<summary>Sticky notes</summary>
+
+A sticky note custom element, click to unstick.
+
+[Sticky notes](custom-elements/sticky-notes)
+
+</details>
+
+
 ***
 
 # Twine scripts

@@ -43,6 +43,24 @@
          this.prepend(this.unstickButton);
       }
 
+      static observedAttributes = ['randomize', 'angle'];
+      attributeChangedCallback(n, o, value) {
+
+         switch (n) {
+            case 'angle': return this.style.rotate = value;
+            case 'randomize':
+               // attribute is removed but we can't easily un-randomize
+               if (value == null) return;
+
+               if (value === '' || value.includes('all')) {
+                  this.randomize();
+               } else {
+                  this.randomize(value.includes('color'), value.includes('angle'));
+               }
+         }
+
+      }
+
    };
 
    customElements.define('sticky-note', Sticky);
