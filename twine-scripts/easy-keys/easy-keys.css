@@ -1,0 +1,6 @@
+[data-key]::after {
+   content: '(' attr(data-key) ')';
+   font-size: 80%;
+   vertical-align: super;
+   margin-left: .5em;
+}

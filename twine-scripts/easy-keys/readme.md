@@ -2,6 +2,8 @@
 
 This script allows users to bind key combinations to DOM elements by using the `data-key` attribute.
 
+The attached [CSS file](./easy-keys.css) is optional, if included it displays the attached shortcut next to the element.
+
 **Syntax**
 ```html
 On a clickable element:
