@@ -18,7 +18,7 @@ On a wrapper element:
 
 ### Key expressions
 
-Key expressions are **always written in lowercase**. They accept `ctrl + ` and `shift + ` as prefixes.
+Key expressions are **always written in lowercase**. They accept `ctrl + `, `shift + ` and `alt + ` as prefixes.
 
 - digit keys and numpad keys output their associated number
 - the space bar outputs `space`

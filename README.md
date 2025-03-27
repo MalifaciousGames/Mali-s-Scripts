@@ -69,6 +69,15 @@ A sticky note custom element, click to unstick.
 Format-agnostic scripts for Twine games.
 
 <details>
+<summary>Easy keys</summary>
+
+An easy way to attach key bindings to DOM elements using the `data-key` attribute.
+
+[Easy keys](twine-scripts/easy-keys)
+
+</details>
+
+<details>
 <summary>Media tester</summary>
 
 A script to test asset availability in Twine games.

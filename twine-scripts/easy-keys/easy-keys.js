@@ -6,7 +6,7 @@
       e.target.attributes.hasOwnProperty('contenteditable');
 
    const buildTargetCode = e => {
-      let targetCode = (e.ctrlKey ? 'ctrl + ' : '') + (e.shiftKey ? 'shift + ' : '');
+      let targetCode = (e.ctrlKey ? 'ctrl + ' : '') + (e.shiftKey ? 'shift + ' : '') + (e.altKey ? 'alt + ' : '');
 
       if (e.code.startsWith('Digit')) {
          targetCode += e.code.slice(5);
