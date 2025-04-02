@@ -2,12 +2,14 @@
 
 customElements.define("ring-menu", class RingMenu extends HTMLElement {
 
-   connectedCallback() {
-      this.pointing = this.getAttribute('pointing');
+   constructor() {
+      super();
 
-      // we re-place the elements when the container is resized, or another child is added
-      new ResizeObserver(this.placeChildren.bind(this)).observe(this);
-      new MutationObserver(this.placeChildren.bind(this)).observe(this, { childList: true });
+      this.resizeObs = new ResizeObserver(this.placeChildren.bind(this));
+      this.resizeObs.observe(this);
+
+      this.mutationObs = new MutationObserver(this.placeChildren.bind(this));
+      this.mutationObs.observe(this, { childList: true });
    }
 
    placeChildren() {
@@ -22,10 +24,23 @@ customElements.define("ring-menu", class RingMenu extends HTMLElement {
          const x = Math.cos(rad) * (w / 2), y = Math.sin(rad) * (h / 2);
 
          child.style.translate = `${x}px ${y}px`;
-         if (this.pointing) child.style.rotate = rad + Math.PI / 2 + 'rad';
-
          // increment the radian offset
          rad += sp;
       }
+   }
+
+   static observedAttributes = ['height', 'width'];
+
+   attributeChangedCallback(n, o, v) {
+
+      // missing css unit, treat it as px
+      if (v && /\d$/.test(v.trim())) v += 'px';
+      
+      this.style[n] = v;
+   }
+
+   disconnectedCallback() {
+      this.resizeObs.disconnect();
+      this.mutationObs.disconnect();
    }
 });
