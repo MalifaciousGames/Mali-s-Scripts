@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
+<html>
+
+<head>
+   <meta charset="utf-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <title>Parser test</title>
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+
+   <style>
+      body {
+         background-color: black;
+         color: seashell;
+      }
+   </style>
+
+   <script src="parser.js"></script>
+   <script src="markdown-profiles.js"></script>
+
+
+   <script>
+
+      customElements.define('m-d', class extends HTMLElement {
+         constructor() {
+            super();
+
+            requestAnimationFrame(() => {
+               const txt = this.innerHTML;
+
+               this.innerHTML = '';
+               this.append(...Parser.parse(txt));
+            });
+         }
+      });
+
+   </script>
+</head>
+
+<body>
+
+
+</body>
+<script>
+   Parser.parseTo(`
+   # t1
+      ## t2
+      ### t3
+      #### t4
+      ##### t5
+      ###### t6
+
+      Paragraph - strikethrough text - with em--dash
+
+      *italic*
+      **bold**
+
+      ***
+      ---
+
+      /* comment */
+
+      _span_
+      __div__
+
+      - A
+      - B
+      -- C
+      -- D
+
+      \- escaped unordered list
+
+      + A
+      + B
+      ++ C
+      ++ D
+
+      \+ escaped ordered list
+
+      Inline code : \`code\` or \`\` code \`\`
+
+      \`\`\`lang
+      Code block
+      \`\`\`
+
+      [Mali-s-Scripts](https://github.com/MalifaciousGames/Mali-s-Scripts)
+
+      <div id="thing"/>
+      
+      ^super^
+      ~sub~
+      It is !very important\\! !
+      checkboxes : [ ] [x] [v]
+      | Head |
+      | Cell |
+   `, document.body)
+</script>
+
+</html>

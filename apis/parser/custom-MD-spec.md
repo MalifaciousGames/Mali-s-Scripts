@@ -178,9 +178,9 @@ The top row of the table is always treated as the head.
 
 ```html
 
-```lang
+\`\`\`lang
    Code
-```
+\`\`\`
 
 <div data-language="lang"><code>Code</code><div>
 ```
