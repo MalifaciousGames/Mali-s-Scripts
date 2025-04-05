@@ -188,6 +188,15 @@ Scripts written for the Sugarcube story format that aren't macros.
 </details>
 
 <details>
+   <summary>Translations API</summary>
+
+   This API manages translated passages and language settings.
+
+   [Translations API](sugarcube-scripts/translations-api)
+
+</details>
+
+<details>
    <summary>Type macro skip for mobile</summary>
 
    A way to skip the `<<type>>` animation on mobile devices.

@@ -44,7 +44,7 @@ Its dark wooden door lies [[invitingly ajar|porch]], just as you remember.
 
 :: intro-fr
 
-Au bout de l'étroit chemin de terre se dresse un église abandonnée. S'il y a longtemps que le toit d'ardoises s'est effondré le clocher se dresse toujours fièrement, en surplomb des contreforts moussus et des antiques murets.
+Au bout de l'étroit chemin de terre se dresse une église abandonnée. S'il y a longtemps que le toit d'ardoises s'est effondré le clocher se dresse toujours fièrement, en surplomb des contreforts moussus et des antiques murets.
 
 Entrouverte, la porte de bois sombre invite le promeneur à [[entrer dans la nef|porch]]. Comme à l'époque...
 
