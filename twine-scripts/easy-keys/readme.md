@@ -25,3 +25,5 @@ Key expressions are **always written in lowercase**. They accept `ctrl + `, `shi
 - the control key alone outputs `control`
 
 Do keep in mind that some keys combinations are browser or system shortcuts and cannot be used as bindings, please do your research!
+
+A single `data-key` can hold any number of comma-separated key expressions : `data-key="a,b,c"`.

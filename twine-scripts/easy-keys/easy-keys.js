@@ -19,6 +19,8 @@
       return targetCode;
    };
 
+
+
    const findTarget = el => el.querySelector('a, button, tw-link, passage-link, [onclick], input, select, textarea') ?? el;
 
    // bind listener
@@ -26,10 +28,19 @@
 
       if (doNothing(e)) return;
 
-      const targets = document.querySelectorAll(`[data-key="${buildTargetCode(e)}"]`);
+      const targets = document.querySelectorAll('[data-key]'), eventCode = buildTargetCode(e);
 
-      for (let target of targets) {
-         findTarget(target).click();
+      for (const target of targets) {
+         let keys = target.getAttribute('data-key');
+
+         if (!keys) continue;
+
+         keys = keys.split(',').map(k => k.trim());
+
+         if (keys.includes(eventCode)) {
+            findTarget(target).click();
+         }
+
       }
 
    }, true);

@@ -1,0 +1,37 @@
+#override-menu {
+   position: fixed;
+   display: none;
+   height: 0;
+   overflow-y: hidden;
+   border: 1px solid;
+   transition: .3s height;
+}
+
+#override-menu>span {
+   display: flex;
+   flex-direction: column;
+   padding: .5rem;
+
+   gap: .5rem;
+}
+
+.menu-item-holder {
+   display: flex;
+   flex-direction: column;
+   gap: .5rem;
+}
+
+.menu-item-holder>:not(:first-child) {
+   margin-left: 1rem;
+   position: relative;
+}
+
+
+.menu-item-holder>:not(:first-child)::before {
+   content: '⮡';
+   display: inline-block;
+   position: absolute;
+   left: -1rem;
+   color: seashell;
+   font-weight: bold;
+}
