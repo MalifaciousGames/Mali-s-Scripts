@@ -2,8 +2,8 @@
 
    const doNothing = e =>
       e.key === 'Enter' ||
-      ['INPUT', 'TEXTAREA'].includes(e.target.nodeName) ||
-      e.target.attributes.hasOwnProperty('contenteditable');
+      ['input', 'textarea'].includes(e.target.nodeName.toLowerCase()) ||
+      e.target.isContentEditable;
 
    const buildTargetCode = e => {
       let targetCode = (e.ctrlKey ? 'ctrl + ' : '') + (e.shiftKey ? 'shift + ' : '') + (e.altKey ? 'alt + ' : '');
@@ -18,8 +18,6 @@
 
       return targetCode;
    };
-
-
 
    const findTarget = el => el.querySelector('a, button, tw-link, passage-link, [onclick], input, select, textarea') ?? el;
 
@@ -43,6 +41,6 @@
 
       }
 
-   }, true);
+   }, { capture: true });
 
 };

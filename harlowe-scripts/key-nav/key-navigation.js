@@ -11,8 +11,8 @@
             e.ctrlKey ||
             e.shiftKey ||
             e.altKey ||
-            ['INPUT', 'TEXTAREA'].includes(e.originalTarget.tagName) ||
-            e.originalTarget.hasAttribute('contenteditable')
+            ['input', 'textarea'].includes(e.target.tagName.toLowerCase()) ||
+            e.originalTarget.isContentEditable
          );
       },
 
@@ -54,9 +54,9 @@
          this._enabled = (v = !!v);
 
          if (v) {
-            $('html')[0].setAttribute('data-keynav', '');
+            document.documentElement.setAttribute('data-keynav', '');
          } else {
-            $('html')[0].removeAttribute('data-keynav');
+            document.documentElement.removeAttribute('data-keynav');
          }
       }
    };
