@@ -120,15 +120,6 @@ Scripts written for the Harlowe story format.
 </details>
 
 <details>
-   <summary>Keyboard navigation</summary>
-
-   Automatically binds shortcuts to interactive elements, enabling keyboard-only navigation.
-
-   [Keyboard navigation](harlowe-scripts/key-nav)
-
-</details>
-
-<details>
    <summary>Link sound</summary>
 
    Define a sound effect for every link in a story.
