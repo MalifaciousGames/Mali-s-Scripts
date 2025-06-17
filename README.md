@@ -111,11 +111,29 @@ Properly localize URLs when using Twine's `Play/Test` feature to launch the game
 Scripts written for the Harlowe story format.
 
 <details>
+   <summary>Attribute directives</summary>
+
+   Lets authors use Harlowe variables inside HTML attributes.
+
+   [Attribute directives](harlowe-scripts/attribute-directives)
+
+</details>
+
+<details>
    <summary>Hash navigation</summary>
 
    Enables linking to passages inside the story via the URL's hash value.
 
    [Hash navigation](harlowe-scripts/hash-navigation)
+
+</details>
+
+<details>
+   <summary>HTML inputs for Harlowe</summary>
+
+   Lets authors use any input type in their Harlowe game.
+
+   [HTML inputs for Harlowe](harlowe-scripts/harlowe-inputs)
 
 </details>
 

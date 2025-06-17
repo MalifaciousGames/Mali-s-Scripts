@@ -20,6 +20,10 @@ By default, changing an input's value updates associated variables on the page. 
    $range
 ```
 
+**Passage navigation**
+
+The `data-goto` attribute lets you forward players to a given passage after interacting with the input. Use sparingly, this may feel jarring or frustrating and does not remove the need for input validation.
+
 **Type coercion**
 
 HTML input elements always have strings as values yet most authors would expect `<input type="number">` to return a number. The API enforces basic type coercion:
@@ -46,8 +50,35 @@ This API will work on any element that:
 - uses a `value` property
 - triggers a `change` event
 
-This includes HTML `<select>` elements as well as any custom element that implements input-like behaviors such as my own [`<arrow-box>`](.../custom-elements/arrow-bow).
+This includes HTML `<select>` elements as well as any custom element that implements input-like behaviors such as my own [`<arrow-box>`](https://github.com/MalifaciousGames/Mali-s-Scripts/tree/main/custom-elements/arrow-box).
 
 **Styling**
 
-Input types that are not build into Harlowe (such as radio buttons) may look weird. You can find a pre-built styling scheme [here](.../twine-scripts/input-styles).
+Input types that are not build into Harlowe (such as radio buttons) may look weird. You can find a pre-built styling scheme [here](https://github.com/MalifaciousGames/Mali-s-Scripts/tree/main/twine-scripts/input-styles).
+
+### Examples
+
+Password input.
+```html
+   <input type="password" data-setter="password" placeholder="Password">
+```
+
+Radio buttons.
+```html
+   (set: $pet = '...')
+
+   Choose a pet:
+   Cat : <input type="radio" data-setter="$pet" name="pet" value="cat">
+   Dog : <input type="radio" data-setter="$pet" name="pet" value="dog">
+   Turtle : <input type="radio" data-setter="$pet" name="pet" value="turtle">
+
+   You own a $pet.
+```
+
+Age range.
+```html
+   (set: $age = 20)
+
+   <input type="range" data-setter="age" min="18" max="65">
+   You are $age years old.
+```
