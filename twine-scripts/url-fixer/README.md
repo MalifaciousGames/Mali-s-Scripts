@@ -4,7 +4,9 @@ When launching a game from the Twine interface (via the `Test` or `Play` buttons
 
 This short script aims to be a drop-in solution for games that use relative URLs (`<img src='myFolder/pic.png'>`). 
 
-This script is designed to **only** work when launching from Twine (desktop application or the web version), it does nothing if the game is distributed as a file or hosted online. Authors might wish to remove it from the released version but it is not necessary.
+This script is designed to **only** work when launching from Twine (desktop application or web version), it does nothing if the game is distributed as a file or hosted online. As such, it is not necessary to remove it from the released version.
+
+Keep in mind that leaving the file path in the published game may expose **personal informations** such as username or the hosting platform used.
 
 **This code works for every story format.**
 
