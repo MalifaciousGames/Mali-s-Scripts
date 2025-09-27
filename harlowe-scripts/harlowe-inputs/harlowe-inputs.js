@@ -1,11 +1,14 @@
 ; {
 
+   // HTML inputs for Harlowe by Maliface
+
    const HarloweInput = {
       config: {
          attributes: {
             setter: 'data-setter',
             update: 'data-update',
-            coerce: 'data-coerce'
+            coerce: 'data-coerce',
+            goto: 'data-goto'
          },
          updateByDefault: true
       },
@@ -27,7 +30,6 @@
             if (!variables) continue;
 
             const stateVal = State.variables.TwineScript_GetProperty(variables[0]);
-            console.log(stateVal, variables[0]);
 
             if (input.type === 'checkbox') {
                input.checked = !!stateVal;
@@ -49,6 +51,7 @@
          let { type, value } = t,
             varNames = t.getAttribute(attributes.setter).match(/\w+/g),
             coerceTo = t.getAttribute(attributes.coerce),
+            goto = t.getAttribute(attributes.goto),
             withUpdate = t.hasAttribute(attributes.update) || updateByDefault;
 
          if (!varNames?.length) return;
@@ -59,10 +62,12 @@
          } else if (type === 'number' || type === 'range') {
             value = Number(value);
          } else if (type === 'checkbox') {
-            value = e.target.checked;
+            value = event.target.checked;
          }
 
          this.setVars(varNames, value, withUpdate);
+
+         if (goto) Engine.goToPassage(goto);
       },
 
       setVars(names, value, update) {
@@ -96,6 +101,4 @@
    };
 
    HarloweInput.init();
-
-   window.HarloweInput = HarloweInput;
 };
