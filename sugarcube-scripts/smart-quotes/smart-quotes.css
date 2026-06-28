@@ -1,0 +1,8 @@
+.smartly-quoted {
+   &::before {
+      content: '“';
+   }
+   &::after {
+      content: '”';
+   }
+}
