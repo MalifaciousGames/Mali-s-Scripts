@@ -1,21 +1,6 @@
 /* Mali's save system for Chapbook */
 ; {
    window.SaveSystem = {
-
-      config: {
-         fileName: null, // a string or function that returns one
-         extension: '.tw-save', // the file's extension
-         encoded: true, // whether the save is encoded to base64 (larger but not human-readable)
-         version: null, // the game version, can be anything
-         metadata: null, // arbitrary data or a function that returns it
-
-         // where you put callbacks responsible for updating saves from older versions of CHAPBOOK
-         engineUpdaters: [],
-
-         // where you put callbacks responsible for updating saves from older GAME versions
-         gameUpdaters: []
-      },
-
       getFileName(saveData) {
 
          switch (typeof this.config.fileName) {
@@ -72,7 +57,7 @@
          const input = document.createElement('input');
 
          input.type = 'file';
-         input.accept = this.extension;
+         input.accept = this.config.extension;
 
          input.onchange = () => {
             const reader = new FileReader();
@@ -93,14 +78,14 @@
          try {
             data = JSON.parse(json);
          } catch (e) {
-            throw new Error(`Save file could not be parsed into a usable object, sorry.`);
+            return alert(`Save file could not be parsed into a usable object, sorry.`)
          }
 
          const { game, state, chapbook } = data;
 
          // sanity checks
-         if (!state) throw new Error(`Save file is lacking a state object, something went very wrong.`);
-         if (game.ifid !== engine.story.ifid()) throw new Error(`Save file does not come from this game.`);
+         if (!state) return alert(`Save file is lacking a state object, something went very wrong.`);
+         if (game.ifid !== engine.story.ifid()) return alert(`Save file does not come from this game.`);
 
          // was made in an older version of chapbook, call the updaters if any
          if (chapbook.version !== engine.version && this.config.engineUpdaters?.length) {
@@ -115,7 +100,7 @@
          try {
             engine.state.restoreFromObject(state);
          } catch (e) {
-            throw new Error(`Chapbook was unable to restore the saved state, this is an internal error.`);
+            return alert(`Chapbook was unable to restore the saved state, this is an internal error.`);
          }
 
       }
@@ -138,17 +123,30 @@
       engine.template.inserts.add({
          match: /^load save/i,
          render(label) {
-            return `<a class="link" tabindex="0" role="link" data-save="import">${label ?? 'Load from file'}</a>`;
+            return `<a class="link" tabindex="0" role="link" data-save="import">${label || 'Load from file'}</a>`;
          }
       });
 
       engine.template.inserts.add({
          match: /^save to file/i,
          render(label) {
-            return `<a class="link" tabindex="0" role="link" data-save="export">${label ?? 'Save to file'}</a>`;
+            return `<a class="link" tabindex="0" role="link" data-save="export">${label || 'Save to file'}</a>`;
          }
       });
-
    });
+
+   window.SaveSystem.config = {
+      fileName: null, // a string or function that returns one
+      extension: '.tw-save', // the file's extension
+      encoded: true, // whether the save is encoded to base64 (larger but not human-readable)
+      version: null, // the game version, can be anything
+      metadata: null, // arbitrary data or a function that returns it
+
+      // where you put callbacks responsible for updating saves from older versions of CHAPBOOK
+      engineUpdaters: [],
+
+      // where you put callbacks responsible for updating saves from older GAME versions
+      gameUpdaters: []
+   }
 };
 /* End of save system */
