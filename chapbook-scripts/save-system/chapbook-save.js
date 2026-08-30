@@ -3,13 +3,21 @@
    window.SaveSystem = {
       getFileName(saveData) {
 
+         let name = engine.story.name() + '-save';
+
          switch (typeof this.config.fileName) {
-            case 'string': return this.config.fileName;
-            case 'function': return this.config.fileName.call(null, saveData);
+            case 'string': name = this.config.fileName; break;
+            case 'function': name = this.config.fileName.call(null, saveData);
          }
 
-         const [m, date, hour] = new Date().toJSON().match(/(.+)T(.+)(?=\.)/);
-         return engine.story.name() + '-save-' + date + '-' + hour;
+         if (this.config.withTimeStamp) name += this.makeTimestamp();
+
+         return name;
+      },
+
+      makeTimestamp() {
+         const [_, date, hour] = new Date().toJSON().match(/(.+)T(.+)(?=\.)/);
+         return date + '-' + hour;
       },
 
       // where we store states
@@ -137,6 +145,7 @@
 
    window.SaveSystem.config = {
       fileName: null, // a string or function that returns one
+      withTimeStamp: true, // the file name ends with a timestamp
       extension: '.tw-save', // the file's extension
       encoded: true, // whether the save is encoded to base64 (larger but not human-readable)
       version: null, // the game version, can be anything
